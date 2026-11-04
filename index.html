@@ -32,6 +32,7 @@ body{background:radial-gradient(circle at 8% 0%,#ffe1ed 0,transparent 25%),radia
 .final-report{background:linear-gradient(145deg,#fffafd,#fff0f7);border:2px solid #ecbad1}.final-report h2{color:#9e426e}.final-report-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.final-stat{background:#fff;border:1px solid #f2d6e2;border-radius:14px;padding:17px}.final-stat small{font-size:12px;color:#906778;display:block}.final-stat strong{font-size:25px;display:block;margin-top:9px;color:#a54473}.final-stat span{display:block;margin-top:7px;font-size:11px;color:#947b86;line-height:1.5}.final-one-line{margin-top:16px;padding:19px;border-radius:13px;background:#fce3ef;color:#893958;font-size:17px;font-weight:750;line-height:1.9}.final-guide{font-size:12px;color:#8b6b7b;line-height:1.9;margin-top:13px}.final-guide b{color:#a34c75}@media(max-width:700px){.final-report-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.final-stat strong{font-size:22px}}@media print{#finalSummary{break-inside:avoid}details#chatEvidence,details#chatBalance,details#firebaseRules{display:none}}
 
 .leave-dashboard{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-bottom:17px}.leave-item{background:linear-gradient(145deg,#fff,#fff5f9);border:1px solid #f2cedf;border-radius:16px;padding:20px}.leave-item h3{margin:0 0 12px;font-size:16px;color:#994a72}.leave-item .used{font-size:13px;color:#8c7180}.leave-item .used strong{font-size:20px;color:#aa597c}.leave-item .remaining{border-top:1px solid #f1d4e0;padding-top:12px;margin-top:13px;color:#9d4975;font-size:13px}.leave-item .remaining strong{display:block;font-size:25px;margin-top:4px}.leave-item small{display:block;color:#9d8290;font-size:11px;line-height:1.65;margin-top:10px}.leave-settings{border:1px solid #f2d5e2;padding:15px;border-radius:12px;background:#fffbfd}.leave-settings summary{cursor:pointer;font-size:13px;font-weight:700;color:#9d4c76}.leave-settings-fields{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-top:15px}.leave-settings-fields label{display:flex;flex-direction:column;gap:7px;font-size:12px;color:#8d6278;flex:1;min-width:160px}.leave-settings-fields input{width:100%;padding:10px;border-radius:9px;border:1px solid #eacbd9;background:white}.rest-picker select{border-color:#edcadc;background:#fffbfd}.rest-result{padding:13px;border:1px solid #efd3df;background:#fff3f8;border-radius:10px;color:#904d70;font-size:13px;line-height:1.8}.form-note{font-size:11px;color:#96748a;line-height:1.7;display:block;margin-top:7px}@media(max-width:780px){.leave-dashboard{grid-template-columns:1fr}.leave-item{padding:15px}}
+.cloud-data-actions{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:12px}.cloud-data-actions span{font-size:11px;color:#915a7b;line-height:1.7;flex:1;min-width:180px}.cloud-data-actions .btn:disabled{opacity:.45;cursor:not-allowed}@media(max-width:600px){.cloud-data-actions .btn{width:100%}}
 </style></head><body><div class="shell"><header class="topbar"><div class="logo">A Gift of Providence<small>하느님의 섭리가 마련해 주신 소중한 일에 대한 감사</small></div><div class="topright"><b>김은진</b> · Personal workspace</div></header>
 <section class="hero"><div><span class="overline">MY SCHEDULE · MY RECORD</span><h1>은진의 근무 다이어리,<br>Ora et Labora♡</h1><p>Pray and Work · 기도하고 일하라.<br>근무표 · 출퇴근 기록 · 휴무 및 연차 관리<br>월별 시간표 저장소.</p></div><div class="hero-emblem">E.</div></section>
 <section class="top-photo-panel" id="topPhotoPanel"><div class="top-photo-heading"><div><h2>♡ 월별 근무시간표 갤러리</h2><p>월을 넘기면 그 달에 보관된 시간표 사진을 슬라이드로 볼 수 있어요.</p></div><div class="top-photo-month"><button type="button" id="topMonthPrev" aria-label="이전 달">‹</button><strong id="topPhotoMonth"></strong><button type="button" id="topMonthNext" aria-label="다음 달">›</button></div></div><div class="top-photo-stage" id="topPhotoStage"><div class="top-photo-placeholder"><span class="flower">🌸</span>저장된 시간표를 불러오는 중이에요.</div></div><div class="top-photo-caption" id="topPhotoCaption"></div><div class="top-photo-dots" id="topPhotoDots"></div><div class="top-photo-actions"><label for="topPhotoWeek">사진을 넣을 주간</label><select id="topPhotoWeek" aria-label="사진을 추가할 주간"></select><label for="topPhotoInput" class="btn primary">＋ 시간표 사진 추가</label><input type="file" id="topPhotoInput" accept="image/*" multiple hidden><a href="#images" class="btn" style="text-decoration:none">전체 보관함</a></div></section>
@@ -41,7 +42,7 @@ body{background:radial-gradient(circle at 8% 0%,#ffe1ed 0,transparent 25%),radia
 <section class="panel" id="schedule"><div class="panel-head"><div><h2>한눈에 보는 근무 달력</h2><p class="panel-desc">날짜를 누르면 출퇴근·휴무·연차 기록을 입력하거나 수정할 수 있어요.</p></div><span class="status">김은진 개인 일정</span></div><div class="legend"><span><i class="dot"></i>근무</span><span><i class="dot off"></i>휴무</span><span><i class="dot leave"></i>연차·반차</span><span><i class="dot empty"></i>미입력</span></div><div class="calendar" id="calendar"></div><p class="footerNote">기존 시간표에서 확인된 날짜만 사전 입력했습니다. 미입력 날짜는 휴무로 자동 판정하지 않습니다.</p></section>
 <details class="panel" id="chatEvidence" style="padding:18px 22px"><summary style="cursor:pointer;color:#a64a79;font-weight:750">날짜별 출퇴근 확인 내역 자세히 보기</summary><div style="padding-top:15px"><div class="panel-head"><div><h2>출퇴근 확인 내역</h2><p class="panel-desc">출근시간과 퇴근시간을 확인하고 수정할 수 있어요.</p></div><span class="status">2026.08.18–11.04 자료</span></div><div class="evidence-intro">출근 확인 시각은 실제 출근 시각과 다를 수 있습니다. 확인된 출근 시각과 예정 시간은 구분합니다. 실제 퇴근시간이 확인되지 않은 날은 <b>미확인</b>으로 남깁니다. 계약서상 근무시간은 <b>09:00~18:00, 실근로 7시간 40분</b>이며, 다른 출근 배정일의 퇴근시간은 기존 현장 설명에 따른 <b>참고용 산출값</b>입니다.</div><div id="evidenceSummary" class="evidence-summary"></div><div class="table-wrap"><table class="evidence-table"><thead><tr><th>날짜</th><th>기존 근무표</th><th>출근 확인</th><th>실제 출근(명시)</th><th>출근 배정 추정</th><th>계약서상 기준 퇴근</th><th>배정 기준 예상퇴근*</th><th>실제 퇴근</th><th>판정 · 출처</th></tr></thead><tbody id="evidenceRows"></tbody></table></div><p class="footerNote">* 배정 기준 예상퇴근: 출근 배정시간 + 9시간(기존 설명의 ‘1시간 휴게분 조기퇴근 대체’ 적용 가정). 1시간 조기퇴근이 적용되지 않는다면 +10시간이 기준입니다. 개별 근무지시·휴게 사용 여부·계약 변경에 따라 달라질 수 있습니다. 출근 확인가 없는 날은 휴무 확정이 아닙니다.</p></div></details><details class="panel" id="chatBalance" style="padding:18px 22px"><summary style="cursor:pointer;color:#a64a79;font-weight:750">휴무 계산 과정 자세히 보기</summary><div style="padding-top:15px"><div class="panel-head"><div><h2>월별 휴무 발생 · 사용 · 이월 분석</h2><p class="panel-desc">기존 코드의 김은진 전용 산식과 근무표·기록 기록을 함께 비교합니다.</p></div></div><div id="balanceEvidence"></div></div></details><div class="split"><section class="panel" id="details"><div class="panel-head"><div><h2>날짜별 근무기록</h2><p class="panel-desc">근무시간과 휴게시간을 날짜별로 관리합니다.</p></div><button class="btn" id="csv">CSV 내보내기</button></div><div class="table-wrap"><table><thead><tr><th>날짜</th><th>일정</th><th>출근</th><th>퇴근</th><th>실근로</th><th>메모</th><th>편집</th></tr></thead><tbody id="rows"></tbody></table></div></section>
 <section class="panel" id="images"><div class="panel-head"><div><h2>♡ 주간 시간표 사진</h2><p class="panel-desc">2026년 8월 18일이 포함된 첫 주부터 매주 사진을 차곡차곡 저장하는 개인 시간표 보관함입니다. 한 주에 여러 장을 올릴 수 있어요.</p></div><span class="status" id="weeklyCount">주간 사진 확인 중</span></div>
-<div class="firebase-config"><div class="firebase-heading"><div><b>☁ Firebase 주간 시간표 보관함</b><p>로그인하면 주차별 사진이 Firebase Storage에 계속 누적됩니다. 이전 자료는 삭제되지 않아요.</p></div><span class="cloud-state" id="cloudState">연결 전 · 로컬 보관</span></div><details><summary>Firebase 연결 설정 열기</summary><div class="cloud-fields"><label>Firebase 웹 앱 설정(JSON) <textarea id="firebaseConfig" placeholder='{"apiKey":"...","authDomain":"...","projectId":"...","storageBucket":"...","appId":"..."}'></textarea></label><label>로그인 이메일 <input id="cloudEmail" type="email" placeholder="example@email.com" autocomplete="username"></label><label>로그인 비밀번호 <input id="cloudPassword" type="password" placeholder="Firebase Authentication에 등록한 계정" autocomplete="current-password"></label><div class="rowBtns"><button class="btn primary" id="cloudConnect">연결하고 로그인</button><button class="btn" id="cloudLogout">로그아웃</button></div><p class="cloud-help" id="cloudHelp">Firebase Authentication 이메일/비밀번호 로그인과 Storage를 활성화해 주세요. 설정값은 브라우저에 저장하지만 비밀번호는 저장하지 않습니다.</p></div></details></div>
+<div class="firebase-config"><div class="firebase-heading"><div><b>☁ Firebase 근무기록 · 사진 함께 보관</b><p>로그인하면 근무·휴무·연차·적립시간은 Firestore에, 주간 사진은 Storage에 저장해요.</p></div><span class="cloud-state" id="cloudState">연결 전 · 로컬 보관</span></div><details open><summary>Firebase 연결 설정 열기</summary><div class="cloud-fields"><label>Firebase 웹 앱 설정(JSON) <textarea id="firebaseConfig" placeholder='{"apiKey":"...","authDomain":"...","projectId":"...","storageBucket":"...","appId":"..."}'></textarea></label><label>로그인 이메일 <input id="cloudEmail" type="email" placeholder="example@email.com" autocomplete="username"></label><label>로그인 비밀번호 <input id="cloudPassword" type="password" placeholder="Firebase Authentication에 등록한 계정" autocomplete="current-password"></label><div class="rowBtns"><button class="btn primary" id="cloudConnect">연결하고 로그인</button><button class="btn" id="cloudLogout">로그아웃</button></div><p class="cloud-help" id="cloudHelp">Authentication(이메일/비밀번호), Firestore, Storage를 활성화해 주세요. 설정값은 브라우저에 저장하지만 비밀번호는 저장하지 않습니다.</p></div></details><div class="cloud-data-actions"><button class="btn" id="cloudUploadLocal" type="button" disabled>이 PC 기록을 클라우드로 올리기</button><button class="btn" id="cloudImportPhotos" type="button" disabled>이 PC 기존 사진 클라우드로 옮기기</button><span id="cloudSyncInfo" aria-live="polite">클라우드 연결 전에는 이 브라우저에만 저장돼요.</span></div></div>
 <div class="week-navigator"><button class="btn" id="prevPhotoWeek" type="button">← 이전 주</button><div class="week-current"><small>선택된 주간</small><strong id="weekPhotoLabel"></strong><span id="weekPhotoBadge">사진 0장</span></div><button class="btn" id="nextPhotoWeek" type="button">다음 주 →</button></div>
 <div class="week-selector"><label for="weekPhotoSelect">주간 빠른 선택</label><select id="weekPhotoSelect" aria-label="사진을 관리할 주간"></select><button class="btn" id="currentPhotoWeek" type="button">이번 주</button></div>
 <p class="week-help">주간 구분: 월요일~일요일 · 첫 구간 2026.08.17~08.23 (8월 18일 첫 출근) · 선택한 주에 사진을 올립니다.</p>
@@ -62,7 +63,7 @@ body{background:radial-gradient(circle at 8% 0%,#ffe1ed 0,transparent 25%),radia
 <div class="table-wrap"><table class="bank-table"><thead><tr><th>날짜</th><th>구분</th><th>시간</th><th>근거</th><th></th></tr></thead><tbody id="bankRows"></tbody></table></div>
 <p class="footerNote">미확인 근무기록으로 발생한 적립시간은 계산에 넣지 않습니다. 확인된 실제시간을 날짜별 근무기록에 입력하면 적립분이 자동 재계산됩니다. 1:1 적립과 월 4회 기본 휴무를 섞어 차감하지 않습니다.</p></section>
 <section class="panel" id="balances"><div class="panel-head"><div><h2>기본 휴무와 연차</h2><p class="panel-desc">계약서의 기본 월 4회 휴무와 별도로 적립하는 추가근무 대체휴무를 구분합니다.</p></div></div><div class="leave-dashboard" id="leaveDashboard"></div><div class="rulegrid" id="rulegrid"></div><details class="leave-settings"><summary>♡ 발생·부여 일수 설정하기</summary><div class="leave-settings-fields"><label>이번 달 기본 휴무 발생 <input id="quota" type="number" min="0" max="31" step="1" placeholder="기본 4일"></label><label>연차·월차 발생 조정 (누적 일수) <input id="leaveAdjust" type="number" step="0.5" min="-50" max="100" placeholder="기본 0"></label><label>이번 달 공휴일 대체휴무 부여 (일) <input id="holidayQuota" type="number" step="0.5" min="0" max="31" placeholder="확인 후 입력"></label><button class="btn primary" id="saveLeaveSettings">저장하고 자동 계산</button></div><p class="footerNote">기본 휴무는 계약상 월 4회를 기본값으로 사용합니다. 연차·월차 발생일은 입사일을 기준으로 한 참고 추정치이며, 회사에서 인정한 조정분을 직접 입력할 수 있습니다. 공휴일 대체휴무는 회사에서 실제 부여한 일수만 입력해 주세요. 미입력 상태에서는 잔여를 확정하지 않습니다.</p></details><p class="footerNote">계약서 제4조: 월 4회 휴무(스케줄에 따라 변동). 일반 휴무 사용은 근무표의 휴무 표시를 잠정 집계하며, 적립휴무 차감은 위 시간 장부에 별도로 입력합니다. 기존의 일요일 수 + 추정 추가휴무 공식은 계약서에 없으므로 적용하지 않습니다.</p></section>
-<details class="panel" id="firebaseRules"><summary style="cursor:pointer;font-weight:700;color:#9f4b76">관리자용: 사진 저장 보안 설정</summary><div style="padding-top:14px"><div class="panel-head"><div><h2>Firebase Storage 보안 설정</h2><p class="panel-desc">로그인한 본인만 자신의 시간표 사진에 접근하도록 보관하세요.</p></div></div><p class="subnote">Firebase Console → Storage → Rules에 아래 규칙을 적용할 수 있습니다. 공개 쓰기 규칙은 사용하지 마세요. 이 HTML을 Firebase Hosting에 배포하면 로그인과 이미지 저장을 안정적으로 이용할 수 있습니다.</p><pre class="rules-code">rules_version = '2';
+<details class="panel" id="firebaseRules"><summary style="cursor:pointer;font-weight:700;color:#9f4b76">관리자용: Firebase 데이터·사진 보안 규칙</summary><div style="padding-top:14px"><div class="panel-head"><div><h2>Firebase Firestore + Storage 보안 설정</h2><p class="panel-desc">로그인한 본인만 자신의 시간표 사진에 접근하도록 보관하세요.</p></div></div><p class="subnote">Firebase Console → Storage → Rules에 아래 Storage 규칙을 적용하세요. 공개 쓰기 규칙은 사용하지 마세요. 이 HTML을 Firebase Hosting에 배포하면 로그인과 이미지 저장을 안정적으로 이용할 수 있습니다.</p><pre class="rules-code">rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
     match /users/{userId}/schedule/{allPaths=**} {
@@ -70,8 +71,16 @@ service firebase.storage {
                          &amp;&amp; request.auth.uid == userId;
     }
   }
+}</pre><p class="subnote"><b>Firestore Database → Rules</b>에는 아래 별도 규칙을 적용하세요.</p><pre class="rules-code">rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId}/private/{documentId} {
+      allow read, write: if request.auth != null
+                         &amp;&amp; request.auth.uid == userId;
+    }
+  }
 }</pre><p class="footerNote">Firebase Storage 사용 가능 여부와 요금제 조건은 프로젝트 설정에 따라 다릅니다. 사이트는 Firebase에 로그인하기 전에는 기존 로컬 이미지를 표시합니다.</p></div></details>
-<section class="panel" id="backup"><div class="panel-head"><div><h2>기록 백업</h2><p class="panel-desc">근무기록과 브라우저에 보관한 사진은 백업할 수 있습니다. Firebase 사진은 클라우드에 별도 보관됩니다.</p></div></div><div class="rowBtns"><button class="btn primary" id="backupBtn">근무기록·로컬사진 백업 (JSON)</button><label class="btn" for="restoreInput">백업 복원</label><input type="file" id="restoreInput" accept="application/json,.json" hidden><button class="btn danger" id="resetBtn">기록 초기화</button></div><p class="footerNote">사이트 데이터는 별도 서버로 전송되지 않고 근무기록은 현재 브라우저에 저장됩니다. Firebase를 연결하면 시간표 이미지만 클라우드에 저장됩니다. 근무기록은 자동 동기화되지 않으므로 JSON 백업을 보관하세요.</p></section><section class="panel final-report" id="finalSummary"><div class="panel-head"><div><h2>♡ 김은진 근무·휴무 최종 정산</h2><p class="panel-desc">2026년 8월 18일부터 선택한 달 말일까지 · 기록된 내용 기준</p></div><span class="status">누적 정산</span></div><div class="final-report-grid" id="finalReportGrid"></div><div class="final-one-line" id="finalOneLine"></div><div class="final-guide" id="finalReportDetails"></div></section><div class="footer">PINK WORK DIARY · KIM EUNJIN</div></div>
+<section class="panel" id="backup"><div class="panel-head"><div><h2>기록 백업</h2><p class="panel-desc">근무기록 및 브라우저에 있는 사진을 별도 파일로 백업할 수 있습니다. Firebase에 연결한 경우 기록과 클라우드 사진은 각각 온라인 보관됩니다.</p></div></div><div class="rowBtns"><button class="btn primary" id="backupBtn">근무기록·로컬사진 백업 (JSON)</button><label class="btn" for="restoreInput">백업 복원</label><input type="file" id="restoreInput" accept="application/json,.json" hidden><button class="btn danger" id="resetBtn">기록 초기화</button></div><p class="footerNote">Firebase 로그인 시 근무기록은 Firestore에 자동 저장되며 주간 사진은 Storage에 저장됩니다. 연결이 없으면 이 브라우저에만 보관됩니다. 정기적인 JSON 백업도 권장합니다. Firebase 사진은 JSON 백업에 포함되지 않습니다.</p></section><section class="panel final-report" id="finalSummary"><div class="panel-head"><div><h2>♡ 김은진 근무·휴무 최종 정산</h2><p class="panel-desc">2026년 8월 18일부터 선택한 달 말일까지 · 기록된 내용 기준</p></div><span class="status">누적 정산</span></div><div class="final-report-grid" id="finalReportGrid"></div><div class="final-one-line" id="finalOneLine"></div><div class="final-guide" id="finalReportDetails"></div></section><div class="footer">PINK WORK DIARY · KIM EUNJIN</div></div>
 <div class="modalWrap" id="editor"><div class="dialog"><h3 id="modalTitle">근무 기록</h3><p>일정과 실제 출퇴근시간을 각각 기록해 주세요.</p><div class="fields"><div class="field full"><label>날짜</label><input id="editDate" type="date"></div><div class="field full"><label>근무 구분</label><select id="editShift"><option value="">미입력</option><option>7출</option><option>8출</option><option>9출</option><option>10출</option><option>10.5출</option><option>11출</option><option>12출</option><option>13출</option><option>14출</option><option>15출</option><option>16출</option><option>휴무</option><option>대체공휴일 사용</option><option>연차</option><option>월차</option><option>반차(오전)</option><option>반차(오후)</option><option>병가</option><option>경조휴가</option><option>교육</option><option>결근</option><option>지각</option><option>조퇴</option><option>기타</option></select></div><div class="field"><label>출근시간</label><input id="editStart" type="time"></div><div class="field"><label>퇴근시간</label><input id="editEnd" type="time"></div><div class="field full rest-picker"><label>① 점심 20분은 어떻게 사용했나요?</label><select id="editLunchMode"><option value="unknown">아직 확인하지 않음</option><option value="break">실제로 20분 휴게</option><option value="early">20분 조기퇴근으로 대체</option><option value="none">휴게·조기퇴근 모두 미사용</option></select></div><div class="field full rest-picker"><label>② 별도 휴게 1시간은 어떻게 사용했나요?</label><select id="editBreakMode"><option value="unknown">아직 확인하지 않음</option><option value="break">실제로 60분 휴게</option><option value="early">60분 조기퇴근으로 대체</option><option value="none">휴게·조기퇴근 모두 미사용</option></select></div><div class="field full"><div class="rest-result" id="restPreview">두 휴게의 사용 방식을 선택하면 실근로시간이 계산됩니다.</div><small class="form-note">실제 휴게만 실근로에서 차감합니다. 조기퇴근으로 대체한 시간은 입력된 퇴근시각에 이미 포함된 것으로 보고 다시 빼지 않습니다.</small></div><div class="field full"><label>메모</label><textarea id="editNote" placeholder="일정 변경, 출퇴근 특이사항, 휴무 사유 등"></textarea></div></div><div class="modalActions"><button class="btn danger" id="deleteRecord">기록 삭제</button><button class="btn" id="closeEditor">취소</button><button class="btn primary" id="saveRecord">저장하기</button></div></div></div>
 <div class="modalWrap lightbox" id="lightbox"><button class="lightClose" id="closeLight" aria-label="닫기">×</button><img id="bigImage" class="preview" alt="시간표 이미지 확대"></div>
 <script>
@@ -81,7 +90,7 @@ const KEY='eunjin-personal-work-journal-v1',IMGKEY='eunjin-journal-pictures-v1';
 const $=id=>document.getElementById(id),pad=n=>String(n).padStart(2,'0');const today=new Date();let year=today.getFullYear(),month=today.getMonth()+1,editing=null;
 function fresh(){return {records:structuredClone(SEED),quotas:{},timeBank:[],hireDate:'2026-08-18'}}
 let data;try{data=JSON.parse(localStorage.getItem(KEY))||fresh()}catch{data=fresh()}if(!data.records||typeof data.records!=='object')data=fresh();data.quotas||={};data.timeBank||=[];
-const save=()=>localStorage.setItem(KEY,JSON.stringify(data));const key=(y,m,d)=>`${y}-${pad(m)}-${pad(d)}`;const monthKey=()=>`${year}-${pad(month)}`;const days=()=>new Date(year,month,0).getDate();const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const save=()=>{localStorage.setItem(KEY,JSON.stringify(data));if(typeof cloudSaveLater==='function')cloudSaveLater()};const key=(y,m,d)=>`${y}-${pad(m)}-${pad(d)}`;const monthKey=()=>`${year}-${pad(month)}`;const days=()=>new Date(year,month,0).getDate();const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function shiftCategory(s){if(s==='휴무'||s==='대체공휴일 사용')return'off';if(/연차|월차|반차|병가|경조|결근/.test(s))return'leave';return s?'work':'empty'}
 function restModes(r){
  // Previous saved records retain their actual break minutes; historical one-hour mode remains compatible.
@@ -158,36 +167,97 @@ $('restoreInput').onchange=async e=>{try{const file=e.target.files[0];if(!file)r
 $('resetBtn').onclick=async()=>{if(!confirm('정말 모든 근무기록과 이미지를 삭제하시겠습니까? 백업하지 않은 내용은 복구할 수 없습니다.'))return;if(!confirm('한 번 더 확인합니다. 전체 기록을 초기화할까요?'))return;data=fresh();save();for(const x of await imageAll())await removePhoto(x.id);render()};
 
 
-// Firebase-only photo archive. All attendance ledger data remains local unless exported.
-let cloud=null,cloudUser=null,cloudModules=null,cloudLoading=false;
+// Firebase cloud sync: Firestore for all work ledger data, Storage for images.
+let cloud=null,cloudUser=null,cloudModules=null,cloudLoading=false;let cloudSyncTimer=null,cloudSyncQueue=Promise.resolve(),cloudSyncReady=false;
 const CLOUD_CONFIG_KEY='eunjin-firebase-image-config-v1';
 try{const saved=localStorage.getItem(CLOUD_CONFIG_KEY);if(saved)$('firebaseConfig').value=saved}catch{}
 function cloudStatus(text){$('cloudState').textContent=text}
+function cloudSaveLater(){
+ if(!cloudSyncReady||!cloudUser||!cloud?.db)return;
+ clearTimeout(cloudSyncTimer);
+ $('cloudSyncInfo').textContent='변경한 기록 저장 준비 중…';
+ cloudSyncTimer=setTimeout(()=>cloudWriteSnapshot(),650);
+}
+function cloudWriteSnapshot(){
+ if(!cloudSyncReady||!cloudUser||!cloud?.db)return cloudSyncQueue;
+ const userId=cloudUser.uid;
+ const snapshot=JSON.parse(JSON.stringify(data));
+ const {firestoreMod}=cloudModules;
+ const ref=firestoreMod.doc(cloud.db,'users',userId,'private','workDiary');
+ cloudStatus('☁ 저장 중…');
+ cloudSyncQueue=cloudSyncQueue.catch(()=>{}).then(async()=>{
+   if(!cloudUser||cloudUser.uid!==userId)throw Error('다시 로그인해야 합니다.');
+   await firestoreMod.setDoc(ref,{journal:snapshot,updatedAt:firestoreMod.serverTimestamp(),formatVersion:2});
+   if(cloudUser?.uid===userId){cloudStatus('☁ 모든 기록 저장됨');$('cloudSyncInfo').textContent='근무기록·휴무·연차·적립시간이 클라우드에 저장되었습니다.';}
+ }).catch(e=>{cloudStatus('⚠ 기록 저장 실패');$('cloudSyncInfo').textContent='저장 실패: '+(e.message||e)+' · 현재 PC에는 기록이 남아 있습니다.';throw e});
+ return cloudSyncQueue;
+}
+$('cloudUploadLocal').onclick=async()=>{
+ if(!cloudUser)return alert('먼저 Firebase에 로그인해 주세요.');
+ if(!confirm('현재 PC에 표시된 근무·휴무 기록 전체를 클라우드 기록으로 덮어쓸까요? 다른 기기에서 변경한 내용이 있다면 먼저 백업해 주세요.'))return;
+ try{cloudSyncReady=true;await cloudWriteSnapshot();alert('현재 PC 기록을 Firebase에 저장했습니다.')}catch(e){cloudSyncReady=false;alert('업로드하지 못했습니다: '+e.message)}
+};
+$('cloudImportPhotos').onclick=async()=>{
+ if(!cloudUser)return alert('먼저 Firebase에 로그인해 주세요.');
+ try{
+  const photos=await imageAll();if(!photos.length)return alert('이 PC에 이전할 사진이 없습니다.');
+  if(!confirm(`이 PC의 사진 ${photos.length}장을 Firebase에 복사할까요? 기존 로컬 사진은 삭제하지 않습니다.`))return;
+  const {storageMod}=cloudModules;let success=0;
+  for(const x of photos){
+   if(!x.dataUrl)continue;
+   const resp=await fetch(x.dataUrl);const blob=await resp.blob();
+   const wk=x.week|| (x.month?weekStartOf(new Date(x.month+'-01T12:00:00')):FIRST_PHOTO_WEEK);
+   const safe=(x.name||'photo').replace(/[^a-zA-Z0-9._-]/g,'_').slice(-65);
+   const filename='import_'+String(x.id).replace(/[^a-zA-Z0-9_-]/g,'_')+'_'+safe;
+   const ref=storageMod.ref(cloud.storage,`users/${cloudUser.uid}/schedule/weeks/${wk}/${filename}`);
+   await storageMod.uploadBytes(ref,blob,{contentType:blob.type||'image/jpeg',customMetadata:{originalName:x.name||'이전 사진',weekStart:wk}});
+   success++;$('cloudSyncInfo').textContent=`사진 옮기는 중 ${success}/${photos.length}장`;
+  }
+  await refreshWeekArchive();await renderWeeklyGallery();await loadTopPhotoMonth();
+  $('cloudSyncInfo').textContent=`사진 ${success}장을 클라우드에 복사했어요.`;
+  alert(`사진 ${success}장 이전 완료. 주간이 맞는지 확인해 주세요.`);
+ }catch(e){$('cloudSyncInfo').textContent='사진 이전 오류: '+(e.message||e);alert('사진 이전 중 오류가 발생했습니다: '+e.message)}
+};
 async function connectFirebase(){
  if(cloudLoading)return;cloudLoading=true;$('cloudConnect').disabled=true;
  try{
   const cfg=JSON.parse($('firebaseConfig').value.trim());
   for(const k of ['apiKey','authDomain','projectId','storageBucket','appId'])if(!cfg[k])throw Error('Firebase 설정에 '+k+' 항목이 필요합니다.');
-  const [appMod,authMod,storageMod]=await Promise.all([
+  const [appMod,authMod,storageMod,firestoreMod]=await Promise.all([
     import('https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js'),
     import('https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js'),
-    import('https://www.gstatic.com/firebasejs/11.10.0/firebase-storage.js')
+    import('https://www.gstatic.com/firebasejs/11.10.0/firebase-storage.js'),
+    import('https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js')
   ]);
-  cloudModules={appMod,authMod,storageMod};
+  cloudModules={appMod,authMod,storageMod,firestoreMod};
   const app=appMod.getApps().find(x=>x.name==='eunjin-private-image-store')||appMod.initializeApp(cfg,'eunjin-private-image-store');
-  const auth=authMod.getAuth(app),storage=storageMod.getStorage(app);
+  const auth=authMod.getAuth(app),storage=storageMod.getStorage(app),db=firestoreMod.getFirestore(app);
   const email=$('cloudEmail').value.trim(),password=$('cloudPassword').value;
   if(!email||!password)throw Error('등록된 이메일과 비밀번호를 입력해 주세요.');
   const credentials=await authMod.signInWithEmailAndPassword(auth,email,password);
-  cloud={auth,storage};cloudUser=credentials.user;
+  cloud={auth,storage,db};cloudUser=credentials.user;
   localStorage.setItem(CLOUD_CONFIG_KEY,JSON.stringify(cfg));$('cloudPassword').value='';
-  cloudStatus('☁ Firebase 연결됨');$('cloudHelp').textContent='로그인 완료. 시간표 이미지는 로그인 계정의 Firebase Storage에 저장됩니다. 근무기록은 현재 브라우저에 저장됩니다.';
+  cloudStatus('☁ 기록 불러오는 중…');
+  const docRef=firestoreMod.doc(db,'users',cloudUser.uid,'private','workDiary');
+  const snap=await firestoreMod.getDoc(docRef);
+  if(snap.exists() && snap.data()?.journal?.records){
+    data=snap.data().journal;data.quotas||={};data.timeBank||=[];
+    localStorage.setItem(KEY,JSON.stringify(data));
+    cloudSyncReady=true;render();
+    cloudStatus('☁ 모든 기록 연결됨');$('cloudSyncInfo').textContent='클라우드 기록을 불러왔어요. 변경한 내용은 자동 저장됩니다.';
+  }else{
+    cloudSyncReady=false;
+    cloudStatus('☁ 연결됨 · 첫 기록 업로드 필요');
+    $('cloudSyncInfo').textContent='클라우드에 아직 근무기록이 없어요. 「이 PC 기록을 클라우드로 올리기」를 눌러 주세요.';
+  }
+  $('cloudUploadLocal').disabled=false;$('cloudImportPhotos').disabled=false;
+  $('cloudHelp').textContent='연결 완료. 근무기록은 Firestore, 사진은 Storage에 저장합니다. 기존 사진이 이 PC에 있다면 사진 이전 버튼을 눌러 주세요.';
   await renderGallery();
- }catch(e){cloudStatus('연결 실패 · 로컬 보관');$('cloudHelp').textContent='연결 오류: '+(e?.message||String(e))+' · Storage/Authentication 설정과 Hosting 주소를 확인해 주세요.';alert('Firebase 연결에 실패했습니다.\n'+(e?.message||e))}
+ }catch(e){cloudSyncReady=false;cloudStatus('연결 실패 · 로컬 보관');$('cloudHelp').textContent='연결 오류: '+(e?.message||String(e))+' · Storage/Authentication 설정과 Hosting 주소를 확인해 주세요.';alert('Firebase 연결에 실패했습니다.\n'+(e?.message||e))}
  finally{cloudLoading=false;$('cloudConnect').disabled=false}
 }
 $('cloudConnect').onclick=connectFirebase;
-$('cloudLogout').onclick=async()=>{if(cloud?.auth&&cloudModules)await cloudModules.authMod.signOut(cloud.auth);cloudUser=null;cloud=null;cloudStatus('로그아웃 · 로컬 보관');await renderGallery()};
+$('cloudLogout').onclick=async()=>{if(cloud?.auth&&cloudModules)await cloudModules.authMod.signOut(cloud.auth);cloudUser=null;cloud=null;cloudSyncReady=false;clearTimeout(cloudSyncTimer);$('cloudUploadLocal').disabled=true;$('cloudImportPhotos').disabled=true;cloudStatus('로그아웃 · 로컬 보관');await renderGallery()};
 async function addCloudOrLocalPhotos(files){
  const imgs=[...files].filter(f=>f.type.startsWith('image/'));
  if(!imgs.length)return alert('이미지 파일을 선택해 주세요.');
@@ -240,7 +310,7 @@ drop.ondrop=async e=>{e.preventDefault();drop.classList.remove('drag');await upl
 // Previous monthly archive stays accessible without moving/deleting its images.
 const oldConnectFirebase=connectFirebase;
 $('cloudConnect').onclick=async()=>{await oldConnectFirebase();await refreshWeekArchive();await renderWeeklyGallery()};
-$('cloudLogout').onclick=async()=>{if(cloud?.auth&&cloudModules)await cloudModules.authMod.signOut(cloud.auth);cloudUser=null;cloud=null;cloudStatus('로그아웃 · 로컬 보관');await renderGallery();await refreshWeekArchive();await renderWeeklyGallery()};
+$('cloudLogout').onclick=async()=>{if(cloud?.auth&&cloudModules)await cloudModules.authMod.signOut(cloud.auth);cloudUser=null;cloud=null;cloudSyncReady=false;clearTimeout(cloudSyncTimer);$('cloudUploadLocal').disabled=true;$('cloudImportPhotos').disabled=true;cloudStatus('로그아웃 · 로컬 보관');await renderGallery();await refreshWeekArchive();await renderWeeklyGallery()};
 renderWeekPicker();refreshWeekArchive().then(renderWeeklyGallery);
 const CHAT_REPORTS={"2026-08-19":{"report":"06:51","explicit":null,"line":142,"message":"출근했습니다"},"2026-08-21":{"report":"08:41","explicit":null,"line":342,"message":"출근했습니다"},"2026-08-22":{"report":"08:43","explicit":null,"line":525,"message":"출근했습니다"},"2026-08-23":{"report":"07:42","explicit":null,"line":614,"message":"출근했습니다"},"2026-08-24":{"report":"08:47","explicit":null,"line":699,"message":"출근했습니다"},"2026-08-25":{"report":"08:49","explicit":null,"line":900,"message":"출근했습니다"},"2026-08-26":{"report":"08:31","explicit":null,"line":1038,"message":"출근했습니다"},"2026-08-28":{"report":"06:41","explicit":null,"line":1140,"message":"출근했습니다"},"2026-08-29":{"report":"06:49","explicit":null,"line":1171,"message":"출근했습니다"},"2026-08-30":{"report":"06:52","explicit":null,"line":1327,"message":"출근했습니다"},"2026-09-02":{"report":"06:48","explicit":null,"line":1543,"message":"출근했습니다"},"2026-09-03":{"report":"06:48","explicit":null,"line":1630,"message":"출근했습니다"},"2026-09-04":{"report":"06:48","explicit":null,"line":1706,"message":"출근했습니다"},"2026-09-05":{"report":"08:46","explicit":null,"line":1836,"message":"출근했습니다"},"2026-09-06":{"report":"07:44","explicit":null,"line":2097,"message":"출근했습니다"},"2026-09-07":{"report":"09:07","explicit":"08:40","line":2314,"message":"8시40분 출근했습니다"},"2026-09-10":{"report":"08:44","explicit":null,"line":2907,"message":"출근했습니다"},"2026-09-11":{"report":"07:46","explicit":null,"line":3177,"message":"출근했습니다"},"2026-09-12":{"report":"09:50","explicit":null,"line":3268,"message":"출근했습니다"},"2026-09-13":{"report":"09:47","explicit":null,"line":3322,"message":"출근했습니다"},"2026-09-14":{"report":"08:41","explicit":null,"line":3365,"message":"출근했습니다"},"2026-09-15":{"report":"08:46","explicit":null,"line":3454,"message":"출근했습니다"},"2026-09-17":{"report":"07:46","explicit":null,"line":3677,"message":"출근했습니다"},"2026-09-18":{"report":"07:47","explicit":null,"line":3724,"message":"출근했습니다"},"2026-09-19":{"report":"09:47","explicit":null,"line":3892,"message":"출근했습니다"},"2026-09-20":{"report":"09:47","explicit":null,"line":4059,"message":"출근했습니다"},"2026-09-22":{"report":"08:41","explicit":null,"line":4439,"message":"출근했습니다"},"2026-09-23":{"report":"08:45","explicit":null,"line":4545,"message":"출근했습니다"},"2026-09-24":{"report":"06:41","explicit":null,"line":4745,"message":"출근했습니다"},"2026-09-26":{"report":"08:42","explicit":null,"line":4911,"message":"출근했습니다"},"2026-09-27":{"report":"09:45","explicit":null,"line":5228,"message":"출근했습니다"},"2026-09-28":{"report":"08:42","explicit":null,"line":5391,"message":"출근했습니다"},"2026-09-29":{"report":"08:45","explicit":null,"line":5547,"message":"출근했습니다"},"2026-10-04":{"report":"09:43","explicit":null,"line":6094,"message":"출근했습니다"},"2026-10-05":{"report":"09:43","explicit":null,"line":6222,"message":"출근했습니다"},"2026-10-06":{"report":"06:47","explicit":null,"line":6389,"message":"출근했습니다"},"2026-10-07":{"report":"06:45","explicit":null,"line":6521,"message":"출근했습니다"},"2026-10-08":{"report":"06:46","explicit":null,"line":6634,"message":"출근했습니다"},"2026-10-10":{"report":"06:41","explicit":null,"line":6758,"message":"출근했습니다"},"2026-10-11":{"report":"06:45","explicit":null,"line":6818,"message":"출근했습니다"},"2026-10-12":{"report":"09:45","explicit":null,"line":6955,"message":"출근했습니다"},"2026-10-13":{"report":"08:48","explicit":null,"line":7100,"message":"출근했습니다"},"2026-10-16":{"report":"09:39","explicit":null,"line":7322,"message":"출근했습니다"},"2026-10-17":{"report":"10:45","explicit":null,"line":7638,"message":"출근했습니다"},"2026-10-18":{"report":"06:33","explicit":null,"line":7745,"message":"출근했습니다"},"2026-10-19":{"report":"06:45","explicit":null,"line":7817,"message":"출근했습니다"},"2026-10-20":{"report":"06:46","explicit":null,"line":7845,"message":"출근했습니다"},"2026-10-21":{"report":"08:45","explicit":null,"line":7880,"message":"출근했습니다"},"2026-10-22":{"report":"07:30","explicit":null,"line":7985,"message":"출근했습니다"},"2026-10-24":{"report":"12:46","explicit":null,"line":8035,"message":"출근했습니다"},"2026-10-25":{"report":"11:40","explicit":null,"line":8194,"message":"출근했습니다"},"2026-10-26":{"report":"11:47","explicit":null,"line":8366,"message":"출근했습니다"},"2026-10-27":{"report":"06:40","explicit":null,"line":8405,"message":"출근했습니다"},"2026-10-28":{"report":"11:48","explicit":null,"line":8570,"message":"출근했습니다"},"2026-10-30":{"report":"11:42","explicit":null,"line":8922,"message":"출근했습니다"},"2026-10-31":{"report":"11:50","explicit":null,"line":9050,"message":"출근했습니다"},"2026-11-01":{"report":"12:45","explicit":null,"line":9153,"message":"출근했습니다"},"2026-11-04":{"report":"06:40","explicit":null,"line":9419,"message":"출근했습니다"}};
 const CHAT_SIDE_NOTES={"2026-10-10":[{"time":"15:56","text":"알려드려요. 정민님께서 3시 10분경 레스토랑 마감을 하고 퇴근하라고 하셨는데, 퇴근 당시에 식사 중인 결제를 안하신 고객님들이 여러 팀 계셔서 현실적으로 레스토랑 마감 진행이 어려웠다는 점 알려드립니다."}]};
